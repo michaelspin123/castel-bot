@@ -212,7 +212,7 @@ async def show_promo(query, context):
     keyboard = [
         [InlineKeyboardButton(promo["button"], url=promo["url"])],
         [InlineKeyboardButton("➡️ NEXT CASINO", callback_data="next_promo")],
-        [InlineKeyboardButton("🏠 MENU", callback_data="choose_language")]
+        [InlineKeyboardButton("🏠 MENU", callback_data="menu")]
     ]
 
     await query.message.delete()
@@ -227,5 +227,6 @@ if __name__ == "__main__":
     app.add_handler(CallbackQueryHandler(choose_language, pattern="^choose_language$"))
     app.add_handler(CallbackQueryHandler(language_selected, pattern="^lang_"))
     app.add_handler(CallbackQueryHandler(next_promo, pattern="^next_promo$"))
+    app.add_handler(CallbackQueryHandler(menu, pattern="^menu$"))
 
     app.run_polling()
