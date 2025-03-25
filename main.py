@@ -160,7 +160,17 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await choose_language(update, context)
+    query = update.callback_query
+    await query.answer()
+
+    context.user_data.clear()  # resetujemo korisničke podatke
+
+    keyboard = [[InlineKeyboardButton("START", callback_data="choose_language")]]
+    await query.message.delete()  # obriši staru poruku
+    await query.message.chat.send_message(
+        text="WHAT CAN THIS BOT DO?\n\n- Free Spins Forever\n- Personalized bonuses and updates",
+        reply_markup=InlineKeyboardMarkup(keyboard)
+    )
 
 
 async def choose_language(update: Update, context: ContextTypes.DEFAULT_TYPE):
